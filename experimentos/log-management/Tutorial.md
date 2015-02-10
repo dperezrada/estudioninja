@@ -228,7 +228,7 @@ output {
 
 ## Integración con Slack
  * Ver https://www.graylog.org/resource/plugin/545cc0ace4b0d324cb87ad6d/
- * Crear un token para la API: xoxp-2750676142-2754457234-3678303963-76eaa1
+ * Crear un token para la API: 
  * Bajar [graylog2-alarmcallback-slack-0.90.0.jar](graylog2-alarmcallback-slack-0.90.0.jar)
  * Copiar el archivo `.jar` en el directorio de los plugins de Graylog2 que esta definido en `graylog2.conf`
   * `sudo cp graylog-alarmcallback-slack-1.0.0-SNAPSHOT.jar /usr/share/graylog2-server/plugin/`
