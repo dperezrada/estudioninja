@@ -223,6 +223,11 @@ output {
 }
 ```
 
+## Integración con Slack
+ * Crear un token para la API: xoxp-2750676142-2754457234-3678303963-76eaa1
+ * Bajar [graylog-alarmcallback-slack-1.0.0-SNAPSHOT.jar](estudioninja/experimentos/log-management/graylog-alarmcallback-slack-1.0.0-SNAPSHOT.jar)
+
+
 
 
 
