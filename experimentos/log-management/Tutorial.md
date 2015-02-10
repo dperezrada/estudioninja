@@ -161,6 +161,7 @@ Dec 22 18:28:06 louis rsyslogd: [origin software="rsyslogd" swVersion="4.2.0" x-
 * Seguimos https://www.graylog.org/documentation/setup/server/
 * Dependencias
  * Elastic Search v >=  1.3.4
+   * Para levantarlo: `sudo service elasticsearch start`
  * Mongodb
   * `sudo apt-get install mongodb`
 * `wget https://packages.graylog2.org/releases/graylog2-server/graylog2-server-0.92.4.tgz`
@@ -199,7 +200,29 @@ Dec 22 18:28:06 louis rsyslogd: [origin software="rsyslogd" swVersion="4.2.0" x-
 
 
 ## Monitor blockchain
-* Usa logstash y graylog 
+Usa logstash y graylog 
+
+* Archivo de configuracion `blockchain.conf`
+```
+input {
+  file {
+    path => "/home/philippe/.bitcoin/debug.log"
+    start_position => beginning
+  }
+}
+
+
+output {
+  stdout { codec => rubydebug }
+  tcp {
+    codec => json_lines
+    host => localhost     
+    mode => client
+    port => 11368
+  }
+}
+```
+
 
 
 
