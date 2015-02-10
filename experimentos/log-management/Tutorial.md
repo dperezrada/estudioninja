@@ -51,7 +51,7 @@ bin/logstash -e 'input { stdin { } } output { elasticsearch { host => localhost 
 
 * Usando un archivo de configuracion
  * En archivo logstash-simple.conf
-``
+```
 input { stdin { } }
 output {
   elasticsearch { host => localhost }
@@ -163,11 +163,27 @@ Dec 22 18:28:06 louis rsyslogd: [origin software="rsyslogd" swVersion="4.2.0" x-
  * password_secret = Cqxdr0ZFSuBFZ5uXVpu2lp9noUmUkZOVE7pc9Dljybarrt60zc6AByVEF2uL4
  * root_username = admin
  * root_password_sha2 = 8c6976e5b5410415bde908bd4dee15... (con el hash de yourpassword obtenido en el paso anterior)
+ * elasticsearch_cluster_name = elasticsearch
+ * elasticsearch_discovery_zen_ping_multicast_enabled = false
+ * elasticsearch_discovery_zen_ping_unicast_hosts = localhost:9300
+ * elasticsearch_config_file = /etc/elasticsearch/elasticsearch.yml
 * Lanzar el servidor
  * sudo java -jar graylog2-server.jar --debug 
-
-
-
+* Instalar la interfaz web
+ * https://www.graylog.org/documentation/setup/webinterface/
+ * wget https://packages.graylog2.org/releases/graylog2-web-interface/graylog2-web-interface-0.92.4.tgz
+ * tar xvzf graylog2-web-interface-0.92.4.tgz
+ * cd graylog2-web-interface-0.92.4
+ * Abrir conf/graylog2-web-interface.conf y cambiar los campos siguientes
+   * graylog2-server.uris="http://127.0.0.1:12900/"
+  * application.secret="" usando pwgen
+ * Lanzar
+  * ./bin/graylog2-web-interface
+* Crear entradas
+ * System -> Nodes. Select your graylog2-server node there and click on Manage inputs.
+ * Elegir Raw UDP
+ * Eligir puerto distinto de 5555
+ * echo "Hello Graylog2, let's be friends." | nc -w 1 -u 127.0.0.1 9099
 
 
 ## Monitor blockchain
