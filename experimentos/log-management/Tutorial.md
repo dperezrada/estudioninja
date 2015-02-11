@@ -289,6 +289,9 @@ output {
 }
 ```
 
+* Extractores
+ * Convertir un campo a tipo NUM para hacer estadisticas
+
 
 
 
