@@ -201,6 +201,7 @@ Dec 22 18:28:06 louis rsyslogd: [origin software="rsyslogd" swVersion="4.2.0" x-
 
 
 #### Streams
+ * Exp regular para año 2012: 2012(.*)
 
 
 #### Integración con Slack
