@@ -85,6 +85,7 @@ output {
 }
 ```
 
+
 * Ejemplo "util"
 ```
 input {
@@ -199,8 +200,31 @@ Dec 22 18:28:06 louis rsyslogd: [origin software="rsyslogd" swVersion="4.2.0" x-
  * `echo "Hello Graylog2, let's be friends." | nc -w 1 -u 127.0.0.1 9099`
 
 
+#### Streams
+
+
+#### Integración con Slack
+ * Ver https://www.graylog.org/resource/plugin/545cc0ace4b0d324cb87ad6d/
+ * Crear un token para la API: 
+ * Bajar [graylog2-alarmcallback-slack-0.90.0.jar](graylog2-alarmcallback-slack-0.90.0.jar)
+ * Copiar el archivo `.jar` en el directorio de los plugins de Graylog2 que esta definido en `graylog2.conf`
+  * `sudo cp graylog-alarmcallback-slack-1.0.0-SNAPSHOT.jar /usr/share/graylog2-server/plugin/`
+ * Reiniciar servidor graylog
+ * Crear Stream > 
+ * Manage Alerts > Slack alarm callback. Guardar
+ * En la configuración del canal usar #<nombre canal>
+ * No es necesario poner nombre de usuario. Basta con el token de la API
+
+## Dashboard
+ * Hacer una query
+ * Luego apretar boton add to dashboard (icono azul: aguja)
+
+
 ## Monitor blockchain
 Usa logstash y graylog 
+
+* Link util: http://grokdebug.herokuapp.com/
+
 
 * Archivo de configuracion `blockchain.conf`
 ```
@@ -208,6 +232,12 @@ input {
   file {
     path => "/home/philippe/.bitcoin/debug.log"
     start_position => beginning
+  }
+}
+
+filter {
+  grok {
+    match => { "message" => "%{DATESTAMP}%{SPACE}%{WORD}:%{SPACE}new%{SPACE}best=%{WORD:difficulty}%{SPACE}height=%{WORD}%{SPACE}log2_work=%{NUMBER:log2_work}%{SPACE}tx=%{NUMBER:tx}%{SPACE}date=%{TIMESTAMP_ISO8601:bitcoin_date_stamp}%{SPACE}progress=%{NUMBER:progress}" }
   }
 }
 
@@ -223,19 +253,41 @@ output {
 }
 ```
 
-## Streams
+## Interopeabilidad Logstash y Graylog a traves de GELF
+* Ver http://logstash.net/docs/1.4.2/outputs/gelf
+* Permite enviar datos estructurados de Logstash a Graylog
+* OJO: Input GELP solo funciona con UDP
+```
+input {
+  file {
+    path => "/home/philippe/.bitcoin/debug.log"
+    start_position => beginning
+  }
+}
 
 
-## Integración con Slack
- * Ver https://www.graylog.org/resource/plugin/545cc0ace4b0d324cb87ad6d/
- * Crear un token para la API: 
- * Bajar [graylog2-alarmcallback-slack-0.90.0.jar](graylog2-alarmcallback-slack-0.90.0.jar)
- * Copiar el archivo `.jar` en el directorio de los plugins de Graylog2 que esta definido en `graylog2.conf`
-  * `sudo cp graylog-alarmcallback-slack-1.0.0-SNAPSHOT.jar /usr/share/graylog2-server/plugin/`
- * Reiniciar servidor graylog
- * Crear Stream > 
- * Manage Alerts > Slack alarm callback. Guardar
+filter {
+  grok {
+    match => { "message" => "%{DATESTAMP}%{SPACE}%{WORD}:%{SPACE}new%{SPACE}best=%{WORD:_difficulty}%{SPACE}height=%{WORD}%{SPACE}log2_work=%{NUMBER:log2_work}%{SPACE}tx=%{NUMBER:tx}%{SPACE}date=%{TIMESTAMP_ISO8601:bitcoin_date_stamp}%{SPACE}progress=%{NUMBER:progress}" }
+    }
+}
 
+output {
+  stdout { codec => rubydebug }
+  tcp {
+    codec => json_lines
+    host => localhost     
+    mode => client
+    port => 11368
+  }
+
+  gelf {
+    host => localhost 
+    port => 12203
+  }
+
+}
+```
 
 
 
