@@ -237,7 +237,7 @@ output {
 }
 ```
 
-## Interopeabilidad Logstash y Graylog a traves de GELF
+### Interopeabilidad Logstash y Graylog a traves de GELF
 * Ver http://logstash.net/docs/1.4.2/outputs/gelf
 * Permite enviar datos estructurados de Logstash a Graylog
 * OJO: Input GELP solo funciona con UDP
