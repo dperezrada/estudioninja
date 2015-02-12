@@ -200,27 +200,6 @@ Dec 22 18:28:06 louis rsyslogd: [origin software="rsyslogd" swVersion="4.2.0" x-
  * `echo "Hello Graylog2, let's be friends." | nc -w 1 -u 127.0.0.1 9099`
 
 
-#### Streams
- * Exp regular para año 2012: 2012(.*)
-
-
-#### Integración con Slack
- * Ver https://www.graylog.org/resource/plugin/545cc0ace4b0d324cb87ad6d/
- * Crear un token para la API: 
- * Bajar [graylog2-alarmcallback-slack-0.90.0.jar](graylog2-alarmcallback-slack-0.90.0.jar)
- * Copiar el archivo `.jar` en el directorio de los plugins de Graylog2 que esta definido en `graylog2.conf`
-  * `sudo cp graylog-alarmcallback-slack-1.0.0-SNAPSHOT.jar /usr/share/graylog2-server/plugin/`
- * Reiniciar servidor graylog
- * Crear Stream > 
- * Manage Alerts > Slack alarm callback. Guardar
- * En la configuración del canal usar #<nombre canal>
- * No es necesario poner nombre de usuario. Basta con el token de la API
-
-## Dashboard
- * Hacer una query
- * Luego apretar boton add to dashboard (icono azul: aguja)
-
-
 ## Monitor blockchain
 Usa logstash y graylog 
 * Instalar Bitcoin
@@ -296,6 +275,30 @@ output {
 
 * Extractores
  * Convertir un campo a tipo NUM para hacer estadisticas
+
+
+
+#### Streams
+ * Exp regular para año 2012: 2012(.*)
+
+
+#### Integración con Slack
+ * Ver https://www.graylog.org/resource/plugin/545cc0ace4b0d324cb87ad6d/
+ * Crear un token para la API: 
+ * Bajar [graylog2-alarmcallback-slack-0.90.0.jar](graylog2-alarmcallback-slack-0.90.0.jar)
+ * Copiar el archivo `.jar` en el directorio de los plugins de Graylog2 que esta definido en `graylog2.conf`
+  * `sudo cp graylog-alarmcallback-slack-1.0.0-SNAPSHOT.jar /usr/share/graylog2-server/plugin/`
+ * Reiniciar servidor graylog
+ * Crear Stream > 
+ * Manage Alerts > Slack alarm callback. Guardar
+ * En la configuración del canal usar #<nombre canal>
+ * No es necesario poner nombre de usuario. Basta con el token de la API
+
+## Dashboard
+ * Hacer una query
+ * Luego apretar boton add to dashboard (icono azul: aguja)
+
+
 
 
 
