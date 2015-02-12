@@ -223,7 +223,11 @@ Dec 22 18:28:06 louis rsyslogd: [origin software="rsyslogd" swVersion="4.2.0" x-
 
 ## Monitor blockchain
 Usa logstash y graylog 
-
+* Instalar Bitcoin
+  * wget `https://bitcoin.org/bin/0.9.3/bitcoin-0.9.3-linux.tar.gz`
+  * `tar xvzf bitcoin-0.9.3-linux.tar.gz`
+  * `cd bitcoin-0.9.3-linux/bin/32`
+  * `./bitcoind`
 * Link util: http://grokdebug.herokuapp.com/
 
 
