@@ -90,7 +90,7 @@ output {
 ```
 input {
   file {
-    path => "/tmp/access_log"
+    path => "/var/log/apache2/access.log"
     start_position => beginning
   }
 }
