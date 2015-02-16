@@ -117,15 +117,17 @@ output {
 
 * Multiline
 ```
-file {
-    path => "/var/log/someapp.log"
-    codec => multiline {      
+input {
+  file {
+      path => "/var/log/error.log"
+      codec => multiline {      
       pattern => "^\s"
       what => "previous"
     }
-    
+}
+ 
+output {   
   stdout { codec => rubydebug }
-  }
 }
 ```
 Archivo de error.log
