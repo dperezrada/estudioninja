@@ -119,13 +119,15 @@ output {
 ```
 input {
   file {
-      path => "/var/log/error.log"
+      path => "/home/philippe/Desktop/logstash-1.4.2/error.log"
+      start_position => "beginning"
       codec => multiline {      
-      pattern => "^\s"
-      what => "previous"
-    }
+	      pattern => "^\s"
+      	      what => "previous"
+    	}
+   }
 }
- 
+
 output {   
   stdout { codec => rubydebug }
 }
