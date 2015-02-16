@@ -115,6 +115,26 @@ output {
 }
 ```
 
+* Multiline
+```
+file {
+    path => "/var/log/someapp.log"
+    codec => multiline {      
+      pattern => "^\s"
+      what => "previous"
+    }
+    
+  stdout { codec => rubydebug }
+  }
+}
+```
+Archivo de error.log
+```
+java.lang.Exception: Stack trace at java.lang.Thread.dumpStack(Thread.java:1249) at test.StringReplace.third(StringReplace.java:38) at test.StringReplace.second(StringReplace.java:31) at test.StringReplace.first(StringReplace.java:27) at test.StringReplace.main(StringReplace.java:23) Printing stack trace using printStackTrace() method of Throwable java.lang.Throwable at test.StringReplace.third(StringReplace.java:42) at test.StringReplace.second(StringReplace.java:31) at test.StringReplace.first(StringReplace.java:27) at test.StringReplace.main(StringReplace.java:23) displaying Stack trace from StackTraceElement in Java
+
+Read more: http://javarevisited.blogspot.com/2013/04/how-to-get-current-stack-trace-in-java-thread.html#ixzz3Rwftda8u
+```
+
 * Syslog
 ```
 input {
