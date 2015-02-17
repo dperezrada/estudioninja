@@ -50,7 +50,7 @@ sudo service elasticsearch start
 ```
 bin/logstash -e 'input { stdin { } } output { elasticsearch { host => localhost } }'
 you know, for logs
-curl 'http://localhost:9200/_search?pretty'
+curl 'http://localhost:9200/_search?pretty&q=Felipe'
 ```
 
 * Multiples salidas
