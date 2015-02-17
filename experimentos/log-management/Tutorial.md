@@ -115,6 +115,8 @@ output {
 }
 ```
 
+[Sintaxis Grok](https://github.com/elasticsearch/logstash/blob/v1.4.0/patterns/grok-patterns)
+
 * Multiline
 ```
 input {
